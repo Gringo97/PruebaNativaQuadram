@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="navigation_top_paid">Top Paid</string>
     <string name="navigation_top_free">Top Free</string>
+    <string name="free">Free</string>
 </resources>

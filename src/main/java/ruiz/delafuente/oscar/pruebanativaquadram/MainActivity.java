@@ -4,12 +4,26 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private TextView mTextMessage;
+import ruiz.delafuente.oscar.pruebanativaquadram.Model.AppModel;
+import ruiz.delafuente.oscar.pruebanativaquadram.Utils.SimpleDividerItemDecoration;
+
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity" ;
+    private RecyclerView recyclerView;
+    private AppAdapter adapter;
+    private List<AppModel> appModelList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -18,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+
                     return true;
             }
             return false;
@@ -33,9 +47,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        recyclerView = findViewById(R.id.RecyclerViewAppList);
+        appModelList = new ArrayList<>();
+
+        //Dummy Data
+        appModelList.add(new AppModel("https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook asfjkbsdalkbfalskdjfhvljkafdgakjedg","Mark",9.99));
+       appModelList.add(new AppModel("https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
+        appModelList.add(new AppModel("https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
+        appModelList.add(new AppModel("https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
+        appModelList.add(new AppModel("https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
+        appModelList.add(new AppModel("https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
+
+        adapter = new AppAdapter(this, appModelList, new CustomItemClickListener() {
+            @Override
+            public void onItemClick(View v, String name) {
+                Log.d(TAG, "clicked position:" + name);
+            }
+        });
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
 }
+
