@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">PruebaNativaQuadram</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="free">Free</string>
+
+    <!--Botton Navigation View-->
     <string name="navigation_top_paid">Top Paid</string>
     <string name="navigation_top_free">Top Free</string>
-    <string name="free">Free</string>
+
+
+    <!-- App Description View -->
+    <string name="label_description">Description</string>
+    <string name="label_category">Category</string>
+    <string name="label_version">Version</string>
+    <string name="label_release_date">Release Date</string>
+    <string name="label_current_version">Current Version Release Date</string>
+    <string name="btn_delete_app">Delete</string>
 </resources>

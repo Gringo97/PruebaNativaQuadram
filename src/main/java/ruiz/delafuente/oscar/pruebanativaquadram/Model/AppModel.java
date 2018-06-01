@@ -2,6 +2,7 @@ package ruiz.delafuente.oscar.pruebanativaquadram.Model;
 
 public class AppModel {
 
+    private String appId;
     private String appImage;
     private String appName;
     private String appArtist;
@@ -11,13 +12,21 @@ public class AppModel {
 
     }
 
-    public AppModel(String appImage, String appName, String appArtist, Double appPrice) {
+    public AppModel(String appId,String appImage, String appName, String appArtist, Double appPrice) {
+        this.appId = appId;
         this.appImage = appImage;
         this.appName = appName;
         this.appArtist = appArtist;
         this.appPrice = appPrice;
     }
 
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public String getAppImage() {
         return appImage;

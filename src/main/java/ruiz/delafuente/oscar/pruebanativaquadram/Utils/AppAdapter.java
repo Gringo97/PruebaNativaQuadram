@@ -1,4 +1,4 @@
-package ruiz.delafuente.oscar.pruebanativaquadram;
+package ruiz.delafuente.oscar.pruebanativaquadram.Utils;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,15 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.util.List;
-import ruiz.delafuente.oscar.pruebanativaquadram.Model.AppModel;
 
-import static android.support.constraint.Constraints.TAG;
+import ruiz.delafuente.oscar.pruebanativaquadram.CustomItemClickListener;
+import ruiz.delafuente.oscar.pruebanativaquadram.Model.AppModel;
+import ruiz.delafuente.oscar.pruebanativaquadram.R;
+
 
 public class AppAdapter extends RecyclerView.Adapter<AppAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<AppModel> appModelList;
-    private  CustomItemClickListener listener;
+    private CustomItemClickListener listener;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -90,7 +92,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.MyViewHolder> {
 
 
             Glide.with(mContext).load(appModel.getAppImage())
-                    .override(80, 80).thumbnail(0.1f).centerCrop().error(R.drawable.ic_launcher_foreground)
+                    .override(80, 80).centerCrop().error(R.drawable.ic_launcher_foreground)
                     .into(holder.imgAppCardView);
 
 

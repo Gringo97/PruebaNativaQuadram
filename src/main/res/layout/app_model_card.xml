@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        card_view:cardBackgroundColor="@color/colorPrimary"
+        card_view:cardBackgroundColor="@color/colorPrimaryDark2"
         card_view:cardCornerRadius="@dimen/card_album_radius"
         card_view:cardElevation="0dp">
 
@@ -35,7 +35,7 @@
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
                     android:text="1"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@color/colorLightGrey" />
 
                 <ImageView
                     android:id="@+id/imgAppCardView"
@@ -71,6 +71,7 @@
                             android:id="@+id/txtVAppPriceCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_weight="6"
                             android:text="4,95€"
@@ -84,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="TextView"
-                        android:textColor="@color/colorDarkGrey" />
+                        android:textColor="@color/colorLightGrey" />
                 </LinearLayout>
 
             </LinearLayout>
