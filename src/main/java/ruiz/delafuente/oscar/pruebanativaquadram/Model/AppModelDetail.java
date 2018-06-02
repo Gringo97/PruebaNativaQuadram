@@ -15,7 +15,8 @@ public class AppModelDetail {
     private Date currentVersionReleaseDate;
     private String description;
 
-    public AppModelDetail(){}
+    public AppModelDetail() {
+    }
 
     public AppModelDetail(String artworkUrl100, String trackName, String artistName, Double price, List genresList, Double version, Date releaseDate, Date currentVersionReleaseDate, String description) {
         this.artworkUrl100 = artworkUrl100;

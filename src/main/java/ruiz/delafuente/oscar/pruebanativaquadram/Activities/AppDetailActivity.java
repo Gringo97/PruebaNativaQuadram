@@ -10,7 +10,7 @@ import ruiz.delafuente.oscar.pruebanativaquadram.R;
 public class AppDetailActivity extends AppCompatActivity {
 
     ImageView imgApp;
-    TextView  txtVAppName;
+    TextView txtVAppName;
     TextView txtVDeveloperName;
     TextView txtVPrice;
     TextView txtVCategory;

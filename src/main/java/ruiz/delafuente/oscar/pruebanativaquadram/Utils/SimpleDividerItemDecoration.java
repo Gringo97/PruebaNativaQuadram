@@ -8,7 +8,7 @@ import android.view.View;
 
 import ruiz.delafuente.oscar.pruebanativaquadram.R;
 
-public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration{
+public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
     public SimpleDividerItemDecoration(Context context) {

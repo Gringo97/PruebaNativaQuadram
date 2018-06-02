@@ -14,6 +14,16 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import ruiz.delafuente.oscar.pruebanativaquadram.Model.TopAppsRetrofit.AppDetailFeed;
+import ruiz.delafuente.oscar.pruebanativaquadram.Model.TopAppsRetrofit.Entry;
+import ruiz.delafuente.oscar.pruebanativaquadram.Model.TopAppsRetrofit.Feed;
+import ruiz.delafuente.oscar.pruebanativaquadram.Model.TopAppsRetrofit.ImImage;
+import ruiz.delafuente.oscar.pruebanativaquadram.RestClient;
 import ruiz.delafuente.oscar.pruebanativaquadram.Utils.AppAdapter;
 import ruiz.delafuente.oscar.pruebanativaquadram.CustomItemClickListener;
 import ruiz.delafuente.oscar.pruebanativaquadram.Model.AppModel;
@@ -21,10 +31,18 @@ import ruiz.delafuente.oscar.pruebanativaquadram.R;
 import ruiz.delafuente.oscar.pruebanativaquadram.Utils.SimpleDividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity" ;
+    private static final String TAG = "MainActivity";
     private RecyclerView recyclerView;
     private AppAdapter adapter;
     private List<AppModel> appModelList;
+
+    private List<Entry> entrys;
+    private String id;
+    private String name;
+    private String img100 = null;
+    private String price;
+    private String artist;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
+                    try {
+                        loadJSON();
+                    } catch (Exception ex) {
+                        Log.e("Lod JSON", ex.getMessage());
+                    }
                     return true;
                 case R.id.navigation_dashboard:
 
@@ -51,37 +73,99 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.RecyclerViewAppList);
         appModelList = new ArrayList<>();
 
-        //Dummy Data
-        appModelList.add(new AppModel("1", "https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook asfjkbsdalkbfalskdjfhvljkafdgakjedg","Mark",9.99));
-        appModelList.add(new AppModel("2","https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
-        appModelList.add(new AppModel("3","https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
-        appModelList.add(new AppModel("4","https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
-        appModelList.add(new AppModel("5","https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
-        appModelList.add(new AppModel("6","https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/05/6e/c0/056ec02d-310e-d1ba-c888-3534578d9ed8/Prod-1x_U007emarketing-85-220-0-5.png/100x100bb-85.png","Facebook","Mark",9.99));
 
-        adapter = new AppAdapter(this, appModelList, new CustomItemClickListener() {
-            @Override
-            public void onItemClick(View v, String id) {
-
-              for (int i = 0; i < appModelList.size();i ++){
-                  if(appModelList.get(i).getAppId() == id){
-
-                  }
-                }
-            }
-        });
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
-
-
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+    private void loadJSON() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(RestClient.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RestClient client = retrofit.create(RestClient.class);
+        Call<AppDetailFeed> requesApps = client.getFeed();
+
+        requesApps.enqueue(new Callback<AppDetailFeed>() {
+            @Override
+            public void onResponse(Call<AppDetailFeed> call, Response<AppDetailFeed> response) {
+                if (!response.isSuccessful()) {
+                    Log.i("TAG", "Error" + response.code());
+                } else {
+
+                    //Response
+                    Log.v("Resp", "" + response.headers());
+                    Log.v("Resp", "" + response.body().toString());
+                    Log.v("Resp", "" + response.code());
+
+                    //AppDetailFeed
+                    AppDetailFeed appDetailFeed = response.body();
+                    Log.v("Resp", "----->" + response.body().getFeed().getTitle().getLabel());
+
+
+                    //Feed
+                    Feed feed = appDetailFeed.getFeed();
+                    Log.v("Entrys1", feed.getId().getLabel());
+                    Log.v("datos", appDetailFeed.getFeed().toString());
+
+
+                    //List<Entry>
+                    entrys = feed.getEntry();
+
+                    Log.v("Entrys2", "--------->" + entrys.get(0).getTitle().getLabel());
+
+
+                    for (Entry entry : entrys) {
+                        if (entry.getImPrice().getAttributes().getAmount().equals("0.00000")) {
+                            price = getString(R.string.free);
+                        } else {
+                            Log.v("Price", entrys.get(1).getImPrice().getAttributes().getAmount());
+                            price = entry.getImPrice().getAttributes().getAmount();
+                        }
+
+                        artist = entry.getImArtist().getLabel().toString();
+                        name = entry.getTitle().getLabel();
+                        id = entry.getId().getLabel();
+                        for (ImImage imImage : entry.getImImage()) {
+                            if (imImage.getAttributes().getHeight().equals("100")) {
+                                img100 = imImage.getLabel();
+                            }
+                        }
+
+
+                        appModelList.add(new AppModel(id, img100, name, artist, price));
+                    }
+
+
+                    adapter = new AppAdapter(getBaseContext(), appModelList, new CustomItemClickListener() {
+                        @Override
+                        public void onItemClick(View v, String id) {
+
+                            for (int i = 0; i < appModelList.size(); i++) {
+                                if (appModelList.get(i).getAppId() == id) {
+
+                                }
+                            }
+                        }
+                    });
+
+
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getBaseContext(), 1);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getBaseContext()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AppDetailFeed> call, Throwable t) {
+                Log.e(TAG, "Error: " + t.getMessage());
+            }
+        });
+    }
+
 
 }
 

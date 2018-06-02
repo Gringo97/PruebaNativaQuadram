@@ -6,13 +6,10 @@ public class AppModel {
     private String appImage;
     private String appName;
     private String appArtist;
-    private Double appPrice;
+    private String appPrice;
 
-    public AppModel(){
 
-    }
-
-    public AppModel(String appId,String appImage, String appName, String appArtist, Double appPrice) {
+    public AppModel(String appId, String appImage, String appName, String appArtist, String appPrice) {
         this.appId = appId;
         this.appImage = appImage;
         this.appName = appName;
@@ -52,11 +49,11 @@ public class AppModel {
         this.appArtist = appArtist;
     }
 
-    public Double getAppPrice() {
+    public String getAppPrice() {
         return appPrice;
     }
 
-    public void setAppPrice(Double appPrice) {
+    public void setAppPrice(String appPrice) {
         this.appPrice = appPrice;
     }
 }
