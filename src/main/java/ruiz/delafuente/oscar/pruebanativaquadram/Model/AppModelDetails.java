@@ -1,24 +1,24 @@
 package ruiz.delafuente.oscar.pruebanativaquadram.Model;
 
-import java.util.Date;
-import java.util.List;
 
-public class AppModelDetail {
+public class AppModelDetails {
 
+    private String id;
     private String artworkUrl100;
     private String trackName;
     private String artistName;
-    private Double price;
-    private List genresList;
-    private Double version;
-    private Date releaseDate;
-    private Date currentVersionReleaseDate;
+    private String price;
+    private String genresList;
+    private String version;
+    private String releaseDate;
+    private String currentVersionReleaseDate;
     private String description;
 
-    public AppModelDetail() {
+    public AppModelDetails() {
     }
 
-    public AppModelDetail(String artworkUrl100, String trackName, String artistName, Double price, List genresList, Double version, Date releaseDate, Date currentVersionReleaseDate, String description) {
+    public AppModelDetails(String id,String artworkUrl100, String trackName, String artistName, String price, String genresList, String version, String releaseDate, String currentVersionReleaseDate, String description) {
+        this.id = id;
         this.artworkUrl100 = artworkUrl100;
         this.trackName = trackName;
         this.artistName = artistName;
@@ -30,6 +30,13 @@ public class AppModelDetail {
         this.description = description;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getArtworkUrl100() {
         return artworkUrl100;
@@ -55,43 +62,43 @@ public class AppModelDetail {
         this.artistName = artistName;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public List getGenresList() {
+    public String getGenresList() {
         return genresList;
     }
 
-    public void setGenresList(List genresList) {
+    public void setGenresList(String genresList) {
         this.genresList = genresList;
     }
 
-    public Double getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(Double version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public Date getCurrentVersionReleaseDate() {
+    public String getCurrentVersionReleaseDate() {
         return currentVersionReleaseDate;
     }
 
-    public void setCurrentVersionReleaseDate(Date currentVersionReleaseDate) {
+    public void setCurrentVersionReleaseDate(String currentVersionReleaseDate) {
         this.currentVersionReleaseDate = currentVersionReleaseDate;
     }
 

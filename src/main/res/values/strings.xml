@@ -14,4 +14,7 @@
     <string name="label_release_date">Release Date</string>
     <string name="label_current_version">Current Version Release Date</string>
     <string name="btn_delete_app">Delete</string>
+    <string name="appDeletedBd">appDeletedBd</string>
+    <string name="saveSharedPreferenceFailed">There\'s been an error deleting the app from the list</string>
+    <string name="retrofit_response_error">Could not download the list of applications</string>
 </resources>

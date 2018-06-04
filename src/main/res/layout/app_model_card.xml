@@ -28,25 +28,24 @@
 
                 <TextView
                     android:id="@+id/txtVNumberApp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
 
 
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0"
                     android:gravity="center_vertical"
-                    android:text="1"
                     android:textColor="@color/colorLightGrey" />
 
                 <ImageView
                     android:id="@+id/imgAppCardView"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
                     android:layout_margin="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:contentDescription="App Image"
-                    card_view:srcCompat="@android:drawable/sym_def_app_icon" />
+                    android:contentDescription="App Image" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,17 +63,14 @@
                             android:layout_height="match_parent"
                             android:layout_marginTop="10dp"
                             android:layout_weight="2"
-                            android:text="TextView"
                             android:textColor="@android:color/white" />
 
                         <TextView
                             android:id="@+id/txtVAppPriceCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_weight="6"
-                            android:text="4,95€"
                             android:textAlignment="textEnd"
                             android:textColor="@color/colorOrange"
                             android:textStyle="bold" />
@@ -84,7 +80,7 @@
                         android:id="@+id/txtVAppArtistCardView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
+                        android:gravity="left|top"
                         android:textColor="@color/colorLightGrey" />
                 </LinearLayout>
 

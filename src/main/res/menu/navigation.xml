@@ -2,13 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:title="@string/navigation_top_paid" />
+        android:id="@+id/navigation_top_free"
+        android:title="@string/navigation_top_free"
+    />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:title="@string/navigation_top_free" />
+        android:id="@+id/navigation_top_paid"
 
-
-
+        android:title="@string/navigation_top_paid" />
 </menu>

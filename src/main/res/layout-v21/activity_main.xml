@@ -16,7 +16,7 @@
         android:background="@drawable/toolbar"
         android:elevation="4dp"
         android:gravity="center_horizontal|center"
-        android:paddingRight="15dp"
+        android:paddingEnd="15dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
 
 
     </android.support.v7.widget.Toolbar>

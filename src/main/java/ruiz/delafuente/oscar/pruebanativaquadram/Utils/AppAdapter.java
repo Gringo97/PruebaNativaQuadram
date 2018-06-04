@@ -1,9 +1,6 @@
 package ruiz.delafuente.oscar.pruebanativaquadram.Utils;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import ruiz.delafuente.oscar.pruebanativaquadram.CustomItemClickListener;
 import ruiz.delafuente.oscar.pruebanativaquadram.Model.AppModel;
@@ -34,6 +29,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.MyViewHolder> {
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        public String id;
         public TextView txtVAppNameCardView;
         public TextView txtVNumberApp;
         public TextView txtVAppPriceCardView;
@@ -71,7 +67,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.MyViewHolder> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(v, (String) mViewHolder.txtVAppNameCardView.getText());
+                listener.onItemClick(v, mViewHolder.id);
             }
         });
         return mViewHolder;
@@ -81,29 +77,19 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.MyViewHolder> {
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         AppModel appModel = appModelList.get(position);
 
-
+        holder.id = appModel.getAppId();
         holder.txtVAppNameCardView.setText(appModel.getAppName());
-        holder.txtVNumberApp.setText("1");
+        holder.txtVNumberApp.setText(String.valueOf(position + 1));
         holder.txtVAppArtistCardView.setText(appModel.getAppArtist());
+        holder.txtVAppPriceCardView.setText(appModel.getAppPrice());
 
-        if (appModel.getAppPrice().equals(0.00)) {
-            holder.txtVAppPriceCardView.setText(String.valueOf(appModel.getAppPrice()));
-        } else {
-            holder.txtVAppPriceCardView.setText(R.string.free);
-        }
         Log.v(" IMG-vURL", appModel.getAppImage());
         try {
-            //Glide.with(mContext).load(appModel.getAppImage()).into(holder.imgAppCardView);
-
-
             Glide.with(mContext).load(appModel.getAppImage()).apply(bitmapTransform(new RoundedCornersTransformation(25, 3)))
                     .into(holder.imgAppCardView);
-
-
         } catch (Exception e) {
             Log.v("Exception Glide", e.getMessage());
         }
-
     }
 
     @Override
